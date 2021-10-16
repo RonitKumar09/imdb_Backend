@@ -1,0 +1,13 @@
+GET http://localhost:8080/
+
+###
+GET https://api.themoviedb.org/3/movie/550?api_key=90c92ef6afe5ff983ece3897ebe54b04
+
+###
+POST http://localhost:8080/signup/
+Content-Type: application/json
+
+{
+    "username":"nxsxs",
+    "password":"sksklskls"
+}
