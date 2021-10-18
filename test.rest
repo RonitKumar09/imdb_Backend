@@ -4,10 +4,25 @@ GET http://localhost:8080/
 GET https://api.themoviedb.org/3/movie/550?api_key=90c92ef6afe5ff983ece3897ebe54b04
 
 ###
-POST http://localhost:8080/signup/
+POST http://localhost:8080/auth/signup/
 Content-Type: application/json
 
 {
-    "username":"nxsxs",
-    "password":"sksklskls"
+    "username":"nxsxdds",
+    "email":"itsyourronit@gmail.com",
+    "password":"skskldskls"
 }
+###
+POST http://localhost:8080/auth/login/
+Content-Type: application/json
+
+{
+    "email":"itsyourronit@gmail.com",
+    "password":"skskldskls"
+}
+###
+GET https://api.themoviedb.org/3/discover/movie?api_key=90c92ef6afe5ff983ece3897ebe54b04&language=en-US&sort_by=popularity.desc&include_adult=true&include_video=true&page=1&with_watch_monetization_types=flatrate
+###
+GET http://localhost:8080/discover/popular/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTZkNmVjOGI2NTQ2ODc3ZmFhN2YyMDIiLCJpYXQiOjE2MzQ1Njk4ODZ9.41LB_zmDVCrYKID9asoxVV6s4HOvG0F6N1dg5-NW6V0
+Accept: application/json
