@@ -1,28 +1,35 @@
 const express = require("express");
 const app = express();
-const bcrypt = require("bcrypt");
+const authRoute = require("./Routes/authRoute/auth.js");
+const feedRoute = require("./Routes/feedRoutes/feed");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 app.use(express.json());
 
+//Database Connection
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((connection) => {
+    console.log("MongoDB connected!");
+  })
+  .catch((err) => {
+    console.log("err:  ", err);
+  });
+
+//test home route
 app.get("/", (req, res) => {
   res.json({ test: "tested OK" });
 });
 
-app.post("/signup", async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    if (!req.body.username || !req.body.password) {
-      return res.status(422).send("Some field is incorrect or empty");
-    }
-    console.log(username);
-    const hashPassword = await bcrypt.hash(password, 10);
-    const user = { name: username, password: hashPassword };
-    res.status(200).json(user);
-  } catch {
-    res.status(500).send("Internal Server Error");
-  }
-  // res.json({ ok: "ok" });
-});
+//route middleware
+app.use("/auth", authRoute);
+app.use("/discover", feedRoute);
 
 app.listen(8080, () => {
   console.log("server running at PORT 8080");
